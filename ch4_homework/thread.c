@@ -4,6 +4,10 @@
 #include <stdio.h>
 #include <sys/types.h>
 
+/*
+    切记链接上 -lpthread 库
+*/
+
 int avg_num, max_num, min_num, len = 0;
 int pthread_kill(pthread_t thread, int sig);
 
