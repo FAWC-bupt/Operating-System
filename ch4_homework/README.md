@@ -119,19 +119,7 @@ _编译器_：GCC-9 on linux
 
 下方流程图有助于理解本程序的运行过程
 
-```mermaid
-graph TD
-    A(pthread_attr_init) -->B(output result<br>pthread_create&#40tid1&#41)
-    B --getAvg&#40&#41--> B1(pthread_exit)
-    B -.pthread_join-.- C(output result<br>pthread_create&#40tid2&#41)
-    B1 --> C
-    C --getMin&#40&#41--> C1(pthread_exit)
-    C -.pthread_join-.- D(output result<br>pthread_create&#40tid3&#41)
-    C1 --> D
-    D --getMin&#40&#41--> D1(pthread_exit)
-    D -.pthread_join-.- E(main thread exit)
-    D1 --> E
-```
+![avatar](https://github.com/FAWC-bupt/Operating-System/blob/main/ch4_homework/flow_chart.jpg)
 
 从流程图可以看出，在多线程操作中，由于采用了pthread_join()函数，主线程将被阻塞，同一时间只有可能运行一个线程。一旦子线程结束，主线程就结束阻塞状态，输出子线程的结果并调用另一个子线程。因此，本程序的执行结果和顺序执行的代码类似，结果是确定的。
 

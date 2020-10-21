@@ -1,0 +1,13 @@
+```mermaid
+graph TD
+    A(pthread_attr_init) -->B(output result<br>pthread_create&#40tid1&#41)
+    B --getAvg&#40&#41--> B1(pthread_exit)
+    B -.pthread_join-.- C(output result<br>pthread_create&#40tid2&#41)
+    B1 --> C
+    C --getMin&#40&#41--> C1(pthread_exit)
+    C -.pthread_join-.- D(output result<br>pthread_create&#40tid3&#41)
+    C1 --> D
+    D --getMin&#40&#41--> D1(pthread_exit)
+    D -.pthread_join-.- E(main thread exit)
+    D1 --> E
+```
