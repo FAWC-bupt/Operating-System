@@ -7,7 +7,7 @@ graph TD
     C --getMin&#40&#41--> C1(pthread_exit)
     C -.pthread_join-.- D(output result<br>pthread_create&#40tid3&#41)
     C1 --> D
-    D --getMin&#40&#41--> D1(pthread_exit)
+    D --getMax&#40&#41--> D1(pthread_exit)
     D -.pthread_join-.- E(main thread exit)
     D1 --> E
 ```
