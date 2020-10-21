@@ -87,40 +87,13 @@ int main(int argc, char *argv[])
 
     // 线程1
     pthread_create(&tid1, &attr, getAvg, arr);
-    pthread_join(tid1, NULL);
-    /*
-        pthread_kill()函数用于判断线程是否结束。
-        这么做的原因是，题目要求必须在子线程结束后输出结果。
-        尽管pthread_join()作用就是以阻塞的方式等待thread指定的线程结束，
-        但是使用pthread_kill()能增加程序容错性和鲁棒性。
-    */
-    kill_rc = pthread_kill(tid1, 0);
-    if (kill_rc == ESRCH)
-        printf("The average value is %d\n", avg_num);
-    else if (kill_rc == EINVAL)
-        printf("signal is invalid\n");
-    else
-        printf("the thread 1 is still alive\n");
+    printf("The average value is %d\n", avg_num);
 
     // 线程2
     pthread_create(&tid2, &attr, getMin, arr);
-    pthread_join(tid2, NULL);
-    kill_rc = pthread_kill(tid2, 0);
-    if (kill_rc == ESRCH)
-        printf("The minimum value is %d\n", min_num);
-    else if (kill_rc == EINVAL)
-        printf("signal is invalid\n");
-    else
-        printf("the thread 2 is still alive\n");
+    printf("The minimum value is %d\n", min_num);
 
     // 线程3
     pthread_create(&tid3, &attr, getMax, arr);
-    pthread_join(tid3, NULL);
-    kill_rc = pthread_kill(tid3, 0);
-    if (kill_rc == ESRCH)
-        printf("The maximum value is %d\n", max_num);
-    else if (kill_rc == EINVAL)
-        printf("signal is invalid\n");
-    else
-        printf("the thread 3 is still alive\n");
+    printf("The maximum value is %d\n", max_num);
 }
