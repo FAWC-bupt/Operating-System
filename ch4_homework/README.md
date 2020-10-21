@@ -72,6 +72,7 @@ _编译器_：GCC-9 on linux
 ### 文件说明
 
     2018213344-凌国瀚-314班-第四章编程作业
+    ├── flow_chart.jpg
     ├── thread.c
     ├── thread
     ├── thread_no_block.c
@@ -79,7 +80,9 @@ _编译器_：GCC-9 on linux
     ├── README.md
     └── README.pdf
 
-文件树如上所示，其中`thread.c`为本作业源代码，`thread`为可执行文件。
+文件树如上所示，其中`flow_chart.jpg`是程序流程图。
+
+`thread.c`为本作业源代码，`thread`为可执行文件。
 
 在作业要求外，额外加入了非阻塞版本的代码`thread_no_block.c`及其可执行文件`thread_no_block`，以作为对照样例说明程序运行结果
 
