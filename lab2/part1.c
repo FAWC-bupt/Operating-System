@@ -34,12 +34,14 @@ int main(int argc, char const *argv[])
     int n;
     scanf("%d", &n);
     pid_t pid;
-    printf("PARENT Process call fork()\n");
+
+    printf("fork() was called\n");
     pid = fork();
+
     if (pid == 0)
     {
-        printf("CHILD Process start\n");
         /* child process */
+        printf("Child Process start\n");
         int *seq = getSeq(n);
 
         printf("Result is:\n");
@@ -47,13 +49,16 @@ int main(int argc, char const *argv[])
             printf("%d ", seq[i]);
         printf("\n");
 
-        printf("CHILD Process done\n");
+        printf("Child Process done\n");
     }
     else if (pid > 0)
     {
         /* parent process */
+        printf("Parent Process waiting\n");
         wait(NULL);
-        printf("PARENT Process done\n");
+        printf("Parent Process resume\n");
+
+        printf("Parent Process done\n");
     }
     return 0;
 }

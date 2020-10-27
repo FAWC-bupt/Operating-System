@@ -50,11 +50,11 @@ int main(int argc, char const *argv[])
 
     ftruncate(parent_fd, DATA_SIZE);
 
-    printf("PARENT Process call fork()\n");
+    printf("fork() was called\n");
     pid = fork();
     if (pid == 0)
     {
-        printf("CHILD Process start\n");
+        printf("Child Process start\n");
         /* child process */
         int *seq = getSeq(n), len = 0, *map_data, child_fd;
 
@@ -68,14 +68,15 @@ int main(int argc, char const *argv[])
         map_data = (int *)mmap(NULL, DATA_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, child_fd, 0);
         memcpy(map_data, seq, sizeof(int) * len);
 
-        printf("CHILD Process done\n");
+        printf("Child Process done\n");
         close(child_fd);
     }
     else if (pid > 0)
     {
         /* parent process */
+        printf("Parent Process waiting\n");
         wait(NULL);
-        printf("PARENT Process resume\n");
+        printf("Parent Process resume\n");
 
         map_get_data = (int *)mmap(NULL, DATA_SIZE, PROT_READ, MAP_SHARED, parent_fd, 0);
 
@@ -86,7 +87,7 @@ int main(int argc, char const *argv[])
 
         close(parent_fd);
         shm_unlink("OS");
-        printf("PARENT Process done\n");
+        printf("Parent Process done\n");
     }
     return 0;
 }
