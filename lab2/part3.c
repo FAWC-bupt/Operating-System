@@ -113,6 +113,7 @@ int main(int argc, char const *argv[])
             return -1;
         }
         printf("In Parent: Reading from pipe 2 – Message is %s\n", msg_from_pipe_parent);
+        printf("\nResult is:\n%s\n\n", msg_from_pipe_parent);
 
         printf("Parent Process done\n");
     }

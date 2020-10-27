@@ -12,6 +12,12 @@
 int arr[1000];
 void wait();
 
+/**
+ * @brief 得到Collatz猜想的结果序列
+ * 
+ * @param parm 待分析的数字N
+ * @return int* 结果序列
+ */
 int *getSeq(int parm)
 {
     int num = parm, i = 0;
@@ -59,6 +65,11 @@ int main(int argc, char const *argv[])
         printf("Parent Process resume\n");
 
         printf("Parent Process done\n");
+    }
+    else
+    {
+        perror("fork error\n");
+        return -1;
     }
     return 0;
 }

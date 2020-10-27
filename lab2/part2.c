@@ -89,5 +89,10 @@ int main(int argc, char const *argv[])
         shm_unlink("OS");
         printf("Parent Process done\n");
     }
+    else
+    {
+        perror("fork error\n");
+        return -1;
+    }
     return 0;
 }
