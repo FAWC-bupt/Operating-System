@@ -45,13 +45,14 @@ int main(int argc, char const *argv[])
     if (parent_fd < 0)
     {
         perror("shm_open failed!\n");
-        exit(1);
+        return -1;
     }
 
     ftruncate(parent_fd, DATA_SIZE);
 
     printf("fork() was called\n");
     pid = fork();
+
     if (pid == 0)
     {
         printf("Child Process start\n");
