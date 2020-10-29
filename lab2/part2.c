@@ -59,6 +59,8 @@ int main(int argc, char const *argv[])
         /* child process */
         int *seq = getSeq(n), len = 0, *map_data, child_fd;
 
+        printf("In Child: get the sequence of Collatz Conjecture\n");
+
         do
         {
             len++;
