@@ -1,6 +1,8 @@
 #include <exception>
 #include <fstream>
 #include <iostream>
+#include <queue>
+#include <random>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -27,6 +29,8 @@ struct ThreadInfo
 
 mutex mutexForJob; // 线程任务中队列操作的互斥锁，防止队列操作或输出操作发送冲突
 char curTime[100];
+queue<int> randomIntQueue;
+
 ofstream outputFile("thread.out");
 
 /**
@@ -81,6 +85,8 @@ void job_request(const ThreadInfo &threadInfo)
  */
 void job_running(const ThreadInfo &threadInfo)
 {
+    int queueNum;
+
     {
         lock_guard<mutex> mutex_lg(mutexForJob);
         getTime();
@@ -94,8 +100,31 @@ void job_running(const ThreadInfo &threadInfo)
     {
         lock_guard<mutex> mutex_lg(mutexForJob);
         getTime();
-        cout << threadInfo << "运行结束 - " << curTime << endl;
-        outputFile << threadInfo << "运行结束 - " << curTime << endl;
+        cout << threadInfo << "运行结束 - " << curTime;
+        outputFile << threadInfo << "运行结束 - " << curTime;
+        if (threadInfo.isReader)
+        {
+            if (!randomIntQueue.empty())
+            {
+                queueNum = randomIntQueue.front();
+                randomIntQueue.pop();
+                cout << " 获得随机数" << queueNum << endl;
+                outputFile << " 获得随机数" << queueNum << endl;
+            }
+            else
+            {
+                cout << " 无法从空队列获得随机数" << endl;
+                outputFile << " 无法从空队列获得随机数" << endl;
+            }
+        }
+        else
+        {
+            srand((unsigned)time(0));
+            queueNum = rand() % 100;
+            randomIntQueue.push(queueNum);
+            cout << " 生成随机数" << queueNum << endl;
+            outputFile << " 生成随机数" << queueNum << endl;
+        }
     };
 }
 
@@ -104,8 +133,8 @@ int main(int argc, char const *argv[])
     try
     {
         if (argc < 2)
-            throw std::runtime_error(
-                "\nHow to use: ./thread <Input File Name>\n"
+            throw runtime_error(
+                "\nHow to use: ./thread <Input File Name> <Lines in Input File (optional)>\n"
                 "Every line in input file should be like: <index> <Role (R/W)> <Start Time> <Duration>\n");
 
         ifstream inputFile(argv[1]);
@@ -267,6 +296,11 @@ int main(int argc, char const *argv[])
         readerPreference();
         cout << "Writer Preference" << endl;
         outputFile << "Writer Preference" << endl;
+
+        // 清空队列
+        queue<int> empty;
+        swap(empty, randomIntQueue);
+
         writerPreference();
         cout << "End" << endl;
         outputFile << "End" << endl;
