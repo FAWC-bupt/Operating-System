@@ -3,6 +3,11 @@
         "*.cpp": "cpp",
         "cstdio": "c",
         "*.tcc": "c",
-        "thread": "cpp"
+        "thread": "cpp",
+        "fstream": "cpp",
+        "iosfwd": "cpp",
+        "stdexcept": "cpp",
+        "deque": "cpp",
+        "vector": "cpp"
     }
 }
