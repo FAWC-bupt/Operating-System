@@ -2,6 +2,7 @@
     "files.associations": {
         "*.cpp": "cpp",
         "cstdio": "c",
-        "*.tcc": "c"
+        "*.tcc": "c",
+        "thread": "cpp"
     }
 }
