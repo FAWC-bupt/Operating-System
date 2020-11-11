@@ -9,31 +9,94 @@
 #include <semaphore.h>
 #include <thread>
 
+// 需要动态链接pthread库，即需要 -lpthread
+
 using namespace std;
 
+/**
+ * @brief 根据实验要求所设置的线程数据结构
+ * 
+ */
 struct ThreadInfo
 {
-    // 根据理论分析图设置数据结构
-    int index;
-    bool isReader;
-    double startTime;
-    double duration;
+    int index;        // 序号
+    bool isReader;    // 是否是读者
+    double startTime; // 开始时间（单位：秒）
+    double duration;  // 运行持续时间（单位：秒）
 };
 
-mutex mutexForJob; // 线程任务中队列操作的互斥锁
+mutex mutexForJob; // 线程任务中队列操作的互斥锁，防止队列操作或输出操作发送冲突
+char curTime[100];
+ofstream outputFile("thread.out");
 
-// 重载输出流运算符
+/**
+ * @brief 重载输出流运算符，将threadInfo作为参数
+ * 
+ * @param os 输出流
+ * @param threadInfo 线程信息 
+ * @return ostream& 更新后的输出流
+ */
 ostream &operator<<(ostream &os, const ThreadInfo &threadInfo)
 {
-    return os << "Thread " << threadInfo.index << (threadInfo.isReader ? " - Reader " : " - Writer ");
+    return os << "线程 " << threadInfo.index << (threadInfo.isReader ? " (Reader)： " : " (Writer)： ");
 }
 
+/**
+ * @brief 获取当前时间
+ * 
+ */
+void getTime()
+{
+    time_t timer;
+    struct tm *tblock;
+
+    time(&timer);
+    tblock = gmtime(&timer);
+    sprintf(curTime, " %d-%d-%d %2d:%2d:%2d ", tblock->tm_year + 1900, tblock->tm_mon + 1, tblock->tm_mday,
+            tblock->tm_hour + 8, tblock->tm_min, tblock->tm_sec);
+}
+
+/**
+ * @brief 该函数用于每个线程开始时，先休眠至其开始的时间，以模拟题目要求的多线程场景
+ * 
+ * @param threadInfo 线程的四个属性信息
+ */
 void job_request(const ThreadInfo &threadInfo)
 {
+    int timeToStart = (int)(threadInfo.startTime * 1000);
+    this_thread::sleep_for(chrono::milliseconds(timeToStart));
+
+    {
+        lock_guard<mutex> mutex_lg(mutexForJob); // C++11引入的自动互斥锁
+        getTime();
+        cout << threadInfo << "请求运行 - " << curTime << endl;
+        outputFile << threadInfo << "请求运行 - " << curTime << endl;
+    };
 }
 
+/**
+ * @brief 该函数用于每个线程的临界区中，该函数将根据线程属性
+ * 
+ * @param threadInfo 线程的四个属性信息
+ */
 void job_running(const ThreadInfo &threadInfo)
 {
+    {
+        lock_guard<mutex> mutex_lg(mutexForJob);
+        getTime();
+        cout << threadInfo << "开始运行 - " << curTime << endl;
+        outputFile << threadInfo << "开始运行 - " << curTime << endl;
+    };
+
+    int runningTime = (int)(threadInfo.duration * 1000);
+    this_thread::sleep_for(chrono::milliseconds(runningTime));
+
+    {
+        lock_guard<mutex> mutex_lg(mutexForJob);
+        getTime();
+        cout << threadInfo << "运行结束 - " << curTime << endl;
+        outputFile << threadInfo << "运行结束 - " << curTime << endl;
+    };
 }
 
 int main(int argc, char const *argv[])
@@ -42,12 +105,12 @@ int main(int argc, char const *argv[])
     {
         if (argc < 2)
             throw std::runtime_error(
-                "How to use: ./thread <Input File Name>\n"
-                "Every line in input file should be like: <index> <Role (R/W)> <Start Time> <Duration>");
+                "\nHow to use: ./thread <Input File Name>\n"
+                "Every line in input file should be like: <index> <Role (R/W)> <Start Time> <Duration>\n");
 
         ifstream inputFile(argv[1]);
         if (!inputFile.is_open())
-            throw runtime_error(string("Can not open file: ") + argv[1] + string(", please check it out."));
+            throw runtime_error(string("\nCan not open file: ") + argv[1] + string(", please check it out.\n"));
 
         // 从文件读取数据并加载至vector容器
         vector<ThreadInfo> threadInfo_vector;
@@ -63,7 +126,7 @@ int main(int argc, char const *argv[])
             else if (role == 'W' || role == 'w')
                 tempInfo.isReader = false;
             else
-                throw runtime_error("The \"role\" char is invalid, please check it out.");
+                throw runtime_error("\nThe \"role\" char is invalid, please check it out.\n");
 
             threadInfo_vector.emplace_back(tempInfo);
         }
@@ -131,10 +194,10 @@ int main(int argc, char const *argv[])
         auto writerPreference = [&]() {
             int readCount = 0, writeCount = 0;
             sem_t semForWriteCount, semForReadCount, semForWrite, semForRead;
-            sem_init(&semForWriteCount, 0, 1);
-            sem_init(&semForReadCount, 0, 1);
-            sem_init(&semForWrite, 0, 1);
-            sem_init(&semForRead, 0, 1);
+            sem_init(&semForWriteCount, 0, 1); // 初始化控制writeCount的信号量为1，即指导书中的mutex1
+            sem_init(&semForReadCount, 0, 1);  // 初始化控制readCount的信号量为1，即指导书中的mutex2
+            sem_init(&semForWrite, 0, 1);      // 初始化控制写的信号量为1，即指导书中的cs_Write
+            sem_init(&semForRead, 0, 1);       // 初始化控制读的信号量为1，即指导书中的cs_Read
 
             // 匿名函数实现WP_ReaderThread()
             auto WP_ReaderThread = [&](const ThreadInfo &threadInfo) {
@@ -160,14 +223,58 @@ int main(int argc, char const *argv[])
             // 匿名函数实现WP_WriterThread()
             auto WP_WriterThread = [&](const ThreadInfo &threadInfo) {
                 job_request(threadInfo);
+
+                sem_wait(&semForWriteCount);
+                writeCount++;
+                if (writeCount == 1)
+                    sem_wait(&semForRead);
+                sem_post(&semForWriteCount);
+
+                sem_wait(&semForWrite);
+                job_running(threadInfo);
+                sem_post(&semForWrite);
+
+                sem_wait(&semForWriteCount);
+                writeCount--;
+                if (writeCount == 0)
+                    sem_post(&semForRead);
+                sem_post(&semForWriteCount);
             };
+
+            /* 
+                writerPreference的主要执行部分
+            */
+            vector<thread> threads_vector;
+            for (const auto &i : threadInfo_vector)
+            {
+                if (i.isReader)
+                    threads_vector.emplace_back(thread(WP_ReaderThread, i));
+                else
+                    threads_vector.emplace_back(thread(WP_WriterThread, i));
+            }
+
+            // 子线程全部执行，主线程等待
+            for (auto &i : threads_vector)
+                if (i.joinable())
+                    i.join();
         };
+
+        /*
+            main函数调用匿名函数输出结果
+        */
+        cout << "Reader Preference" << endl;
+        outputFile << "Reader Preference" << endl;
+        readerPreference();
+        cout << "Writer Preference" << endl;
+        outputFile << "Writer Preference" << endl;
+        writerPreference();
+        cout << "End" << endl;
+        outputFile << "End" << endl;
     }
     catch (const exception &e)
     {
         cerr << e.what() << '\n';
     }
 
-    system("pause");
     return 0;
 }

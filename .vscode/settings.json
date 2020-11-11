@@ -8,6 +8,10 @@
         "iosfwd": "cpp",
         "stdexcept": "cpp",
         "deque": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "chrono": "cpp",
+        "sstream": "cpp",
+        "iostream": "cpp",
+        "ostream": "cpp"
     }
 }
