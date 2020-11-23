@@ -61,7 +61,7 @@ void getTime()
 }
 
 /**
- * @brief 该函数用于每个线程开始时，先休眠至其开始的时间，以模拟题目要求的多线程场景
+ * @brief 该函数用于每个线程开始时（进入区），先休眠至其开始的时间，以模拟题目要求的多线程场景
  * 
  * @param threadInfo 线程的四个属性信息
  */
@@ -147,8 +147,9 @@ int main(int argc, char const *argv[])
         while (inputFile.getline(buf, 64))
         {
             ThreadInfo tempInfo;
-            stringstream ss(buf);
             char role;
+            // 利用C++的stringstream格式化输入数据
+            stringstream ss(buf);
             ss >> tempInfo.index >> role >> tempInfo.startTime >> tempInfo.duration;
             if (role == 'R' || role == 'r')
                 tempInfo.isReader = true;
@@ -200,7 +201,7 @@ int main(int argc, char const *argv[])
             };
 
             /* 
-                readerPreference的主要执行部分
+                调用运行RP_ReaderThread和
             */
             vector<thread> threads_vector;
             for (const auto &i : threadInfo_vector)
