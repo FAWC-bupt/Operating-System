@@ -102,12 +102,12 @@ int init()
 
 int FIFO(int addressStreamLen)
 {
-    cout << "FIFO:" << endl;
+    cout << "\nFIFO:" << endl;
     vector<int> frames;
     int page_fault_count = 0;
     for (size_t i = 0; i < addressStreamLen; i++)
     {
-        cout << i << ": ";
+        cout << "Line " << i + 1 << ": ";
         int page = pageMapping[i];
         vector<int>::iterator it = find(frames.begin(), frames.end(), page);
         if (it != frames.end())
@@ -132,7 +132,7 @@ int FIFO(int addressStreamLen)
         for (size_t j = 0; j < frames.size(); j++)
             cout << frames[j] << ' ';
         cout << endl
-             << "Page fault: " << page_fault_count << endl;
+             << "\tPage fault: " << page_fault_count << endl;
     }
     return page_fault_count;
 }
