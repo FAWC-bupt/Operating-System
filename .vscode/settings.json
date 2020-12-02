@@ -14,6 +14,12 @@
         "iostream": "cpp",
         "ostream": "cpp",
         "algorithm": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "array": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "ratio": "cpp"
     }
 }

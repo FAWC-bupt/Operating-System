@@ -38,23 +38,23 @@ int main(int argc, char const *argv[])
     // 70个顺序地址，10个在前地址，20个在后地址
     for (size_t i = 0; i < ADDRESS_NUM - 1; i++)
     {
-        if (i < 69)
+        if (i < 70)
             address_state[i] = 1;
         else if (i < 89)
             address_state[i] = 0;
         else
             address_state[i] = -1;
     }
-    address_state[ADDRESS_NUM - 1] = 1;
+    address_state[ADDRESS_NUM - 1] = 0;
 
-    // 该乱序仍然保证最后和第一个地址都是顺序执行的地址
+    // 该乱序保证最后的地址是在前地址，第一个地址不是在前地址
     makeRand(address_state, ADDRESS_NUM);
 
     // 确定每个地址指向的的下一个地址
     for (size_t i = 0; i < ADDRESS_NUM; i++)
     {
         if (address_state[i] == 1)
-            address_next[i] = i + 1; // 这意味着最后一个地址会指向ADDRESS_NUM
+            address_next[i] = i + 1; // 顺序执行
         else if (address_state[i] == 0)
         {
             srand((unsigned int)time(NULL));
