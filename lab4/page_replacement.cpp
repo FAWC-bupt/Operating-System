@@ -29,7 +29,7 @@ string line;
 stringstream ss;
 // int memoryAccessStream[ADDRESS_NUM];
 // int pageMapping[ADDRESS_NUM];
-Address memoryAccessString[ADDRESS_NUM];
+Address memoryAccessStream[ADDRESS_NUM];
 
 /**
  * @brief 找到数组最小值的下标，但忽略数组元素-1
@@ -53,7 +53,7 @@ int findArrMinIndex(int *arr, int len)
 }
 
 /**
- * @brief 读取文件，初始化内存，得到内存访问流（数组）
+ * @brief 读取文件，初始化内存，得到内存访问流
  * 
  */
 void init()
@@ -63,7 +63,7 @@ void init()
     {
         ss << line;
         int index = 0;
-        while (ss >> memoryAccessString[index].type)
+        while (ss >> memoryAccessStream[index].type)
         {
             //  cout << memoryAccessString[index].type << ' ';
             index++;
@@ -80,7 +80,7 @@ void init()
     {
         ss << line;
         int index = 0;
-        while (ss >> memoryAccessString[index].next)
+        while (ss >> memoryAccessStream[index].next)
         {
             //  cout << memoryAccessString[index].next << ' ';
             index++;
@@ -94,8 +94,8 @@ void init()
 
     for (size_t i = 0; i < ADDRESS_NUM; i++)
     {
-        memoryAccessString[i].page = memoryAccessString[i].next / PAGE_CAPACITY;
-        memoryAccessString[i].index = i;
+        memoryAccessStream[i].page = memoryAccessStream[i].next / PAGE_CAPACITY;
+        memoryAccessStream[i].index = i;
     }
 
     // Address *curAddress = &memoryAccessString[0];
@@ -134,7 +134,7 @@ int FIFO(int addressStreamLen)
     {
         cout << "Line " << i + 1 << ": ";
         outputFile << "Line " << i + 1 << ": ";
-        int page = memoryAccessString[i].page;
+        int page = memoryAccessStream[i].page;
         vector<int>::iterator it = find(frames.begin(), frames.end(), page);
         if (it != frames.end())
         {
@@ -183,7 +183,7 @@ int LRU(int addressStreamLen)
     {
         cout << "Line " << i + 1 << ": ";
         outputFile << "Line " << i + 1 << ": ";
-        int page = memoryAccessString[i].page;
+        int page = memoryAccessStream[i].page;
         vector<int>::iterator it = find(frames.begin(), frames.end(), page);
         if (it != frames.end())
         {
@@ -228,14 +228,14 @@ int Optimal(int addressStreamLen)
     {
         cout << "Line " << i + 1 << ": ";
         outputFile << "Line " << i + 1 << ": ";
-        int page = memoryAccessString[i].page, future_knowledge[PAGE_NUM];
+        int page = memoryAccessStream[i].page, future_knowledge[PAGE_NUM];
         // future_knowledge指示了每个页在下一次访问时memoryAccessString的下标，下标越大说明需要越长时间才能访问
         for (size_t j = 0; j < PAGE_NUM; j++)
         {
             future_knowledge[j] = INT32_MAX; // future_knowledge初始化为“无限”，这意味着如果这个页未来不可能被使用，则到达其下一次访问的下标为无穷大
             for (size_t k = i + 1; k < addressStreamLen; k++)
             {
-                if (memoryAccessString[k].page == j)
+                if (memoryAccessStream[k].page == j)
                 {
                     future_knowledge[j] = k;
                     break;
@@ -313,8 +313,8 @@ int main(int argc, char const *argv[])
                << "内存访问串：" << endl;
     for (size_t i = 0; i < ADDRESS_NUM; i++)
     {
-        cout << memoryAccessString[i].next << ' ';
-        outputFile << memoryAccessString[i].next << ' ';
+        cout << memoryAccessStream[i].next << ' ';
+        outputFile << memoryAccessStream[i].next << ' ';
     }
     cout << endl;
     outputFile << endl;
