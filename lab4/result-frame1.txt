@@ -1,0 +1,615 @@
+设定随机生成指令共100个
+页大小: 10
+可用帧（物理内存块）数量: 1
+内存访问串：
+1 0 0 4 2 6 7 8 6 10 11 12 13 14 15 1 17 18 4 14 21 26 23 24 22 26 27 28 29 30 31 32 54 34 91 36 22 38 39 40 6 42 43 44 45 31 47 20 49 50 36 52 53 54 55 98 30 58 59 60 61 62 63 64 30 66 67 68 10 70 71 72 86 68 75 76 77 78 79 33 95 82 83 84 85 86 87 98 98 96 76 92 93 94 95 96 97 98 99 31 
+
+FIFO:
+Line 1: 0 
+	Page fault: 1
+Line 2: 0 
+	Page fault: 1
+Line 3: 0 
+	Page fault: 1
+Line 4: 0 
+	Page fault: 1
+Line 5: 0 
+	Page fault: 1
+Line 6: 0 
+	Page fault: 1
+Line 7: 0 
+	Page fault: 1
+Line 8: 0 
+	Page fault: 1
+Line 9: 0 
+	Page fault: 1
+Line 10: 1 
+	Page fault: 2
+Line 11: 1 
+	Page fault: 2
+Line 12: 1 
+	Page fault: 2
+Line 13: 1 
+	Page fault: 2
+Line 14: 1 
+	Page fault: 2
+Line 15: 1 
+	Page fault: 2
+Line 16: 0 
+	Page fault: 3
+Line 17: 1 
+	Page fault: 4
+Line 18: 1 
+	Page fault: 4
+Line 19: 0 
+	Page fault: 5
+Line 20: 1 
+	Page fault: 6
+Line 21: 2 
+	Page fault: 7
+Line 22: 2 
+	Page fault: 7
+Line 23: 2 
+	Page fault: 7
+Line 24: 2 
+	Page fault: 7
+Line 25: 2 
+	Page fault: 7
+Line 26: 2 
+	Page fault: 7
+Line 27: 2 
+	Page fault: 7
+Line 28: 2 
+	Page fault: 7
+Line 29: 2 
+	Page fault: 7
+Line 30: 3 
+	Page fault: 8
+Line 31: 3 
+	Page fault: 8
+Line 32: 3 
+	Page fault: 8
+Line 33: 5 
+	Page fault: 9
+Line 34: 3 
+	Page fault: 10
+Line 35: 9 
+	Page fault: 11
+Line 36: 3 
+	Page fault: 12
+Line 37: 2 
+	Page fault: 13
+Line 38: 3 
+	Page fault: 14
+Line 39: 3 
+	Page fault: 14
+Line 40: 4 
+	Page fault: 15
+Line 41: 0 
+	Page fault: 16
+Line 42: 4 
+	Page fault: 17
+Line 43: 4 
+	Page fault: 17
+Line 44: 4 
+	Page fault: 17
+Line 45: 4 
+	Page fault: 17
+Line 46: 3 
+	Page fault: 18
+Line 47: 4 
+	Page fault: 19
+Line 48: 2 
+	Page fault: 20
+Line 49: 4 
+	Page fault: 21
+Line 50: 5 
+	Page fault: 22
+Line 51: 3 
+	Page fault: 23
+Line 52: 5 
+	Page fault: 24
+Line 53: 5 
+	Page fault: 24
+Line 54: 5 
+	Page fault: 24
+Line 55: 5 
+	Page fault: 24
+Line 56: 9 
+	Page fault: 25
+Line 57: 3 
+	Page fault: 26
+Line 58: 5 
+	Page fault: 27
+Line 59: 5 
+	Page fault: 27
+Line 60: 6 
+	Page fault: 28
+Line 61: 6 
+	Page fault: 28
+Line 62: 6 
+	Page fault: 28
+Line 63: 6 
+	Page fault: 28
+Line 64: 6 
+	Page fault: 28
+Line 65: 3 
+	Page fault: 29
+Line 66: 6 
+	Page fault: 30
+Line 67: 6 
+	Page fault: 30
+Line 68: 6 
+	Page fault: 30
+Line 69: 1 
+	Page fault: 31
+Line 70: 7 
+	Page fault: 32
+Line 71: 7 
+	Page fault: 32
+Line 72: 7 
+	Page fault: 32
+Line 73: 8 
+	Page fault: 33
+Line 74: 6 
+	Page fault: 34
+Line 75: 7 
+	Page fault: 35
+Line 76: 7 
+	Page fault: 35
+Line 77: 7 
+	Page fault: 35
+Line 78: 7 
+	Page fault: 35
+Line 79: 7 
+	Page fault: 35
+Line 80: 3 
+	Page fault: 36
+Line 81: 9 
+	Page fault: 37
+Line 82: 8 
+	Page fault: 38
+Line 83: 8 
+	Page fault: 38
+Line 84: 8 
+	Page fault: 38
+Line 85: 8 
+	Page fault: 38
+Line 86: 8 
+	Page fault: 38
+Line 87: 8 
+	Page fault: 38
+Line 88: 9 
+	Page fault: 39
+Line 89: 9 
+	Page fault: 39
+Line 90: 9 
+	Page fault: 39
+Line 91: 7 
+	Page fault: 40
+Line 92: 9 
+	Page fault: 41
+Line 93: 9 
+	Page fault: 41
+Line 94: 9 
+	Page fault: 41
+Line 95: 9 
+	Page fault: 41
+Line 96: 9 
+	Page fault: 41
+Line 97: 9 
+	Page fault: 41
+Line 98: 9 
+	Page fault: 41
+Line 99: 9 
+	Page fault: 41
+Line 100: 3 
+	Page fault: 42
+
+LRU:
+Line 1: 0 
+	Page fault: 1
+Line 2: 0 
+	Page fault: 1
+Line 3: 0 
+	Page fault: 1
+Line 4: 0 
+	Page fault: 1
+Line 5: 0 
+	Page fault: 1
+Line 6: 0 
+	Page fault: 1
+Line 7: 0 
+	Page fault: 1
+Line 8: 0 
+	Page fault: 1
+Line 9: 0 
+	Page fault: 1
+Line 10: 1 
+	Page fault: 2
+Line 11: 1 
+	Page fault: 2
+Line 12: 1 
+	Page fault: 2
+Line 13: 1 
+	Page fault: 2
+Line 14: 1 
+	Page fault: 2
+Line 15: 1 
+	Page fault: 2
+Line 16: 0 
+	Page fault: 3
+Line 17: 1 
+	Page fault: 4
+Line 18: 1 
+	Page fault: 4
+Line 19: 0 
+	Page fault: 5
+Line 20: 1 
+	Page fault: 6
+Line 21: 2 
+	Page fault: 7
+Line 22: 2 
+	Page fault: 7
+Line 23: 2 
+	Page fault: 7
+Line 24: 2 
+	Page fault: 7
+Line 25: 2 
+	Page fault: 7
+Line 26: 2 
+	Page fault: 7
+Line 27: 2 
+	Page fault: 7
+Line 28: 2 
+	Page fault: 7
+Line 29: 2 
+	Page fault: 7
+Line 30: 3 
+	Page fault: 8
+Line 31: 3 
+	Page fault: 8
+Line 32: 3 
+	Page fault: 8
+Line 33: 5 
+	Page fault: 9
+Line 34: 3 
+	Page fault: 10
+Line 35: 9 
+	Page fault: 11
+Line 36: 3 
+	Page fault: 12
+Line 37: 2 
+	Page fault: 13
+Line 38: 3 
+	Page fault: 14
+Line 39: 3 
+	Page fault: 14
+Line 40: 4 
+	Page fault: 15
+Line 41: 0 
+	Page fault: 16
+Line 42: 4 
+	Page fault: 17
+Line 43: 4 
+	Page fault: 17
+Line 44: 4 
+	Page fault: 17
+Line 45: 4 
+	Page fault: 17
+Line 46: 3 
+	Page fault: 18
+Line 47: 4 
+	Page fault: 19
+Line 48: 2 
+	Page fault: 20
+Line 49: 4 
+	Page fault: 21
+Line 50: 5 
+	Page fault: 22
+Line 51: 3 
+	Page fault: 23
+Line 52: 5 
+	Page fault: 24
+Line 53: 5 
+	Page fault: 24
+Line 54: 5 
+	Page fault: 24
+Line 55: 5 
+	Page fault: 24
+Line 56: 9 
+	Page fault: 25
+Line 57: 3 
+	Page fault: 26
+Line 58: 5 
+	Page fault: 27
+Line 59: 5 
+	Page fault: 27
+Line 60: 6 
+	Page fault: 28
+Line 61: 6 
+	Page fault: 28
+Line 62: 6 
+	Page fault: 28
+Line 63: 6 
+	Page fault: 28
+Line 64: 6 
+	Page fault: 28
+Line 65: 3 
+	Page fault: 29
+Line 66: 6 
+	Page fault: 30
+Line 67: 6 
+	Page fault: 30
+Line 68: 6 
+	Page fault: 30
+Line 69: 1 
+	Page fault: 31
+Line 70: 7 
+	Page fault: 32
+Line 71: 7 
+	Page fault: 32
+Line 72: 7 
+	Page fault: 32
+Line 73: 8 
+	Page fault: 33
+Line 74: 6 
+	Page fault: 34
+Line 75: 7 
+	Page fault: 35
+Line 76: 7 
+	Page fault: 35
+Line 77: 7 
+	Page fault: 35
+Line 78: 7 
+	Page fault: 35
+Line 79: 7 
+	Page fault: 35
+Line 80: 3 
+	Page fault: 36
+Line 81: 9 
+	Page fault: 37
+Line 82: 8 
+	Page fault: 38
+Line 83: 8 
+	Page fault: 38
+Line 84: 8 
+	Page fault: 38
+Line 85: 8 
+	Page fault: 38
+Line 86: 8 
+	Page fault: 38
+Line 87: 8 
+	Page fault: 38
+Line 88: 9 
+	Page fault: 39
+Line 89: 9 
+	Page fault: 39
+Line 90: 9 
+	Page fault: 39
+Line 91: 7 
+	Page fault: 40
+Line 92: 9 
+	Page fault: 41
+Line 93: 9 
+	Page fault: 41
+Line 94: 9 
+	Page fault: 41
+Line 95: 9 
+	Page fault: 41
+Line 96: 9 
+	Page fault: 41
+Line 97: 9 
+	Page fault: 41
+Line 98: 9 
+	Page fault: 41
+Line 99: 9 
+	Page fault: 41
+Line 100: 3 
+	Page fault: 42
+
+Optimal:
+Line 1: 0 
+	Page fault: 1
+Line 2: 0 
+	Page fault: 1
+Line 3: 0 
+	Page fault: 1
+Line 4: 0 
+	Page fault: 1
+Line 5: 0 
+	Page fault: 1
+Line 6: 0 
+	Page fault: 1
+Line 7: 0 
+	Page fault: 1
+Line 8: 0 
+	Page fault: 1
+Line 9: 0 
+	Page fault: 1
+Line 10: 1 
+	Page fault: 2
+Line 11: 1 
+	Page fault: 2
+Line 12: 1 
+	Page fault: 2
+Line 13: 1 
+	Page fault: 2
+Line 14: 1 
+	Page fault: 2
+Line 15: 1 
+	Page fault: 2
+Line 16: 0 
+	Page fault: 3
+Line 17: 1 
+	Page fault: 4
+Line 18: 1 
+	Page fault: 4
+Line 19: 0 
+	Page fault: 5
+Line 20: 1 
+	Page fault: 6
+Line 21: 2 
+	Page fault: 7
+Line 22: 2 
+	Page fault: 7
+Line 23: 2 
+	Page fault: 7
+Line 24: 2 
+	Page fault: 7
+Line 25: 2 
+	Page fault: 7
+Line 26: 2 
+	Page fault: 7
+Line 27: 2 
+	Page fault: 7
+Line 28: 2 
+	Page fault: 7
+Line 29: 2 
+	Page fault: 7
+Line 30: 3 
+	Page fault: 8
+Line 31: 3 
+	Page fault: 8
+Line 32: 3 
+	Page fault: 8
+Line 33: 5 
+	Page fault: 9
+Line 34: 3 
+	Page fault: 10
+Line 35: 9 
+	Page fault: 11
+Line 36: 3 
+	Page fault: 12
+Line 37: 2 
+	Page fault: 13
+Line 38: 3 
+	Page fault: 14
+Line 39: 3 
+	Page fault: 14
+Line 40: 4 
+	Page fault: 15
+Line 41: 0 
+	Page fault: 16
+Line 42: 4 
+	Page fault: 17
+Line 43: 4 
+	Page fault: 17
+Line 44: 4 
+	Page fault: 17
+Line 45: 4 
+	Page fault: 17
+Line 46: 3 
+	Page fault: 18
+Line 47: 4 
+	Page fault: 19
+Line 48: 2 
+	Page fault: 20
+Line 49: 4 
+	Page fault: 21
+Line 50: 5 
+	Page fault: 22
+Line 51: 3 
+	Page fault: 23
+Line 52: 5 
+	Page fault: 24
+Line 53: 5 
+	Page fault: 24
+Line 54: 5 
+	Page fault: 24
+Line 55: 5 
+	Page fault: 24
+Line 56: 9 
+	Page fault: 25
+Line 57: 3 
+	Page fault: 26
+Line 58: 5 
+	Page fault: 27
+Line 59: 5 
+	Page fault: 27
+Line 60: 6 
+	Page fault: 28
+Line 61: 6 
+	Page fault: 28
+Line 62: 6 
+	Page fault: 28
+Line 63: 6 
+	Page fault: 28
+Line 64: 6 
+	Page fault: 28
+Line 65: 3 
+	Page fault: 29
+Line 66: 6 
+	Page fault: 30
+Line 67: 6 
+	Page fault: 30
+Line 68: 6 
+	Page fault: 30
+Line 69: 1 
+	Page fault: 31
+Line 70: 7 
+	Page fault: 32
+Line 71: 7 
+	Page fault: 32
+Line 72: 7 
+	Page fault: 32
+Line 73: 8 
+	Page fault: 33
+Line 74: 6 
+	Page fault: 34
+Line 75: 7 
+	Page fault: 35
+Line 76: 7 
+	Page fault: 35
+Line 77: 7 
+	Page fault: 35
+Line 78: 7 
+	Page fault: 35
+Line 79: 7 
+	Page fault: 35
+Line 80: 3 
+	Page fault: 36
+Line 81: 9 
+	Page fault: 37
+Line 82: 8 
+	Page fault: 38
+Line 83: 8 
+	Page fault: 38
+Line 84: 8 
+	Page fault: 38
+Line 85: 8 
+	Page fault: 38
+Line 86: 8 
+	Page fault: 38
+Line 87: 8 
+	Page fault: 38
+Line 88: 9 
+	Page fault: 39
+Line 89: 9 
+	Page fault: 39
+Line 90: 9 
+	Page fault: 39
+Line 91: 7 
+	Page fault: 40
+Line 92: 9 
+	Page fault: 41
+Line 93: 9 
+	Page fault: 41
+Line 94: 9 
+	Page fault: 41
+Line 95: 9 
+	Page fault: 41
+Line 96: 9 
+	Page fault: 41
+Line 97: 9 
+	Page fault: 41
+Line 98: 9 
+	Page fault: 41
+Line 99: 9 
+	Page fault: 41
+Line 100: 3 
+	Page fault: 42
+缺页率如下: 
+FIFO: 42%
+LRU: 42%
+Optimal: 42%

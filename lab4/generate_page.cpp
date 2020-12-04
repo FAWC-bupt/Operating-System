@@ -28,10 +28,10 @@ void makeRand(int arr[], int count)
 int main(int argc, char const *argv[])
 {
     /**
+     * 数组元素内容如下
      * 顺序执行：1
      * 在前地址：0
      * 在后地址：-1
-     * 
      */
     int address_state[ADDRESS_NUM], address_next[ADDRESS_NUM];
 

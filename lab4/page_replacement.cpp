@@ -17,10 +17,10 @@ int frame_num = 3;       // 帧（物理内存块）的数量
 
 typedef struct
 {
-    int type;
-    int index;
-    int next; // 指向的地址
-    int page; // 指向的地址所在的页（需要的页）
+    int type;  // 地址类型：顺序、在前或在后
+    int index; // 地址下标
+    int next;  // 指向的下一个地址
+    int page;  // 下一个地址所在的页（需要的页）
 } Address;
 
 ifstream inputFile("addressInfo.txt");
@@ -97,29 +97,14 @@ void init()
         memoryAccessStream[i].page = memoryAccessStream[i].next / PAGE_CAPACITY;
         memoryAccessStream[i].index = i;
     }
-
-    // Address *curAddress = &memoryAccessString[0];
-    // int arr_index = 0;
-    // // 为了防止访问地址死循环的情况，设定一个地址只能访问一次，若一个地址被多次访问，则该内存的next就指向其下一个地址（顺序执行）
-    // // 以下算法保证了内存访问从0开始，从ADDRESS_NUM-1结束，但是此时内存访问次数不一定为ADDRESS_NUM
-    // while (curAddress->next != ADDRESS_NUM)
-    // {
-    //     if (!curAddress->isUsed)
-    //     {
-    //         memoryAccessStream[arr_index] = curAddress->index;
-    //         curAddress->isUsed = true;
-    //         curAddress = &memoryAccessString[curAddress->next];
-    //         arr_index++;
-    //     }
-    //     else
-    //     {
-    //         curAddress = &memoryAccessString[curAddress->index + 1];
-    //     }
-    // }
-    // memoryAccessStream[arr_index] = ADDRESS_NUM - 1;
-    // return arr_index + 1;
 }
 
+/**
+ * @brief 先进先出算法
+ * 
+ * @param addressStreamLen 内存访问流长度
+ * @return int 页错误数
+ */
 int FIFO(int addressStreamLen)
 {
     cout << "\nFIFO:" << endl;
@@ -167,6 +152,12 @@ int FIFO(int addressStreamLen)
     return page_fault_count;
 }
 
+/**
+ * @brief 最近最少使用算法
+ * 
+ * @param addressStreamLen 内存访问流长度
+ * @return int 页错误数
+ */
 int LRU(int addressStreamLen)
 {
     cout << "\nLRU:" << endl;
@@ -217,6 +208,12 @@ int LRU(int addressStreamLen)
     return page_fault_count;
 }
 
+/**
+ * @brief 最优置换算法
+ * 
+ * @param addressStreamLen 内存访问流长度
+ * @return int 页错误数
+ */
 int Optimal(int addressStreamLen)
 {
     cout << "\nOptimal:" << endl;
@@ -295,8 +292,8 @@ int main(int argc, char const *argv[])
 {
     cout << "请输入可用帧（物理内存块）数量: " << endl;
     while (!(cin >> frame_num))
-    {                                       //cin输入错误时执行下边语句
-        cin.clear();                        //清除流标记
+    {                //cin输入错误时执行下边语句
+        cin.clear(); //清除流标记
         cin.ignore();
         cin.sync();                         //清空流
         cout << "输入了非数字字符" << endl; //打印错误提示
